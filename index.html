@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+</html>
+<script>
+  document.body.style.margin = '0';
+  // S-Expr parser 
+  const render = ([tag, props = [], hijos = []]) => {
+    const el = Object.assign(document.createElement(tag), Object.fromEntries(props));
+    if (hijos.length) el.append(...hijos.map(render));
+    return el;
+  };
+
+  document.body.append(...[
+    [
+      'div',
+      [
+        ["textContent", "PLACEHOLDER"],
+        ["style", "background-color: red; height: 16px; text-align: center; display: flex; justify-content: center; align-items: center; font-size: 14px;"]
+      ]
+    ],
+    [
+      'div',
+      [
+        ["textContent", "PLACEHOLDER"],
+        ["style", "background-color: blue; height: 81px; text-align: center; display: flex; justify-content: center; align-items: center; font-size: 14px;"]
+      ]
+    ],
+    [
+      'div',
+      [["style", "display: flex; flex-direction: row;"]],
+      [
+        ['div', [["style", "background-color: green; height: 677px; width: 231px;"]]],
+        ['div', [["style", "background-color: yellow; height: 677px; width: 838px;"]]],
+        ['div', [["style", "background-color: red; height: 677px; width: 231px;"]]]
+      ]
+    ]
+  ].map(render));
+</script>
